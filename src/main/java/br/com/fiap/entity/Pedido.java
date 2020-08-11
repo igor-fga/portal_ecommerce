@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,9 +23,17 @@ public class Pedido {
 	@Column(name = "ID")
     private Integer id;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cliente")
-	private Set<Cliente> cliente = new HashSet<>();
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Cliente cliente;
 	
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "produto")
 	private Set<Produto> produto = new HashSet<>();
 
@@ -36,13 +45,6 @@ public class Pedido {
 		this.id = id;
 	}
 
-	public Set<Cliente> getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Set<Cliente> cliente) {
-		this.cliente = cliente;
-	}
 
 	public Set<Produto> getProduto() {
 		return produto;
