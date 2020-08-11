@@ -10,8 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,8 +34,8 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "produto")
-	private Set<Produto> produto = new HashSet<>();
+	@ManyToMany(fetch=FetchType.LAZY, mappedBy="pedidos") 
+	private Set<Produto> produtos = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -46,12 +46,12 @@ public class Pedido {
 	}
 
 
-	public Set<Produto> getProduto() {
-		return produto;
+	public Set<Produto> getProdutos() {
+		return produtos;
 	}
 
-	public void setProduto(Set<Produto> produto) {
-		this.produto = produto;
+	public void setProduto(Set<Produto> produtos) {
+		this.produtos= produtos;
 	}
 
 	
