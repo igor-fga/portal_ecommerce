@@ -24,7 +24,7 @@ public class Pedido {
 	@Column(name = "ID")
     private Integer id;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Cliente cliente;
 	
 	public Cliente getCliente() {
