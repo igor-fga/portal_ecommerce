@@ -1,5 +1,6 @@
 package br.com.fiap.portal.entity;
 
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -15,9 +16,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cliente")
-public class Cliente {
+public class Cliente implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private int id;
 	@Column(name = "NOME", length = 45)
@@ -28,7 +30,7 @@ public class Cliente {
 	private String cpf;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cliente")
 	private Set<Pedido> pedidos = new LinkedHashSet<Pedido>();
-	
+
 	public int getId() {
 		return id;
 	}
