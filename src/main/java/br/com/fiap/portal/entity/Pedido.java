@@ -1,7 +1,7 @@
 package br.com.fiap.portal.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -26,10 +27,12 @@ public class Pedido implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "IDCLIENTE")
 	private Cliente cliente;
+	
 
-	@ManyToMany(mappedBy = "pedidos", cascade = CascadeType.ALL)
-	private List<Produto> produtos;
-
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "produto_pedido", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
+	private Set<Produto> produtos;
+	
 	public int getId() {
 		return id;
 	}
@@ -46,11 +49,11 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public List<Produto> getProdutos() {
+	public Set<Produto> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
+	public void setProdutos(Set<Produto> produtos) {
 		this.produtos = produtos;
 	}
 

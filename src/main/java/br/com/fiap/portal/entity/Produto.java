@@ -30,10 +30,6 @@ public class Produto implements Serializable {
 	private int quantidade;
 	@Column(name = "valor")
 	private double valor;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "PEDIDO_PRODUTO", joinColumns = { @JoinColumn(name = "PEDIDO_ID") }, inverseJoinColumns = {
-			@JoinColumn(name = "PRODUTO_ID") })
-	private List<Pedido> pedidos;
 
 	public int getId() {
 		return id;
@@ -67,11 +63,15 @@ public class Produto implements Serializable {
 		this.valor = valor;
 	}
 
-	public List<Pedido> getPedidos() {
-		return pedidos;
+	public Produto() {
+
 	}
 
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public Produto(String nome, int quantidade, double valor) {
+		super();
+		this.nome = nome;
+		this.quantidade = quantidade;
+		this.valor = valor;
 	}
+
 }
