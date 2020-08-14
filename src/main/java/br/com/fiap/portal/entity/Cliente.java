@@ -1,17 +1,12 @@
 package br.com.fiap.portal.entity;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,8 +23,6 @@ public class Cliente implements Serializable {
 	private String endereco;
 	@Column(name = "CPF", length = 45)
 	private String cpf;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cliente")
-	private Set<Pedido> pedidos = new LinkedHashSet<Pedido>();
 
 	public int getId() {
 		return id;
@@ -63,12 +56,14 @@ public class Cliente implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Set<Pedido> getPedidos() {
-		return pedidos;
+	public Cliente() {
+
 	}
 
-	public void setPedidos(Set<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public Cliente(String nome, String endereco, String cpf) {
+		super();
+		this.nome = nome;
+		this.endereco = endereco;
+		this.cpf = cpf;
 	}
-
 }

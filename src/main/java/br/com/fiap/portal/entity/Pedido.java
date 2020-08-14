@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,11 +23,10 @@ public class Pedido implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private int id;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "IDCLIENTE")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "produto_pedido", joinColumns = @JoinColumn(name = "pedido_id"), inverseJoinColumns = @JoinColumn(name = "produto_id"))
 	private Set<Produto> produtos;
