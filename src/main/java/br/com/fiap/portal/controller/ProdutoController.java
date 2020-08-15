@@ -24,17 +24,15 @@ public class ProdutoController {
 	public List<Produto> Get() {
 		return _produtoRepository.findAll();
 	}
-	
-	@GetMapping("produto/{id}")
+
+	@GetMapping("/produto/{id}")
 	public Optional<Produto> getProdutoById(@PathVariable("id") Integer id) {
 		return _produtoRepository.findById(id);
 	}
-	
-	
-	@RequestMapping(value = "/produto", method =  RequestMethod.POST)
-    public Produto Post(@RequestBody Produto produto)
-    {
-        return _produtoRepository.save(produto);
-    }
-	
+
+	@RequestMapping(value = "/produto", method = RequestMethod.POST)
+	public Produto Post(@RequestBody Produto produto) {
+		return _produtoRepository.save(produto);
+	}
+
 }
