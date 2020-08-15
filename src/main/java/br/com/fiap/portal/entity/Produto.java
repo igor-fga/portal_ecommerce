@@ -68,5 +68,11 @@ public class Produto implements Serializable {
 		this.quantidade = quantidade;
 		this.valor = valor;
 	}
+	
+	public void retirar(Produto prod, int subtracao){
+		prod.quantidade =-subtracao;
+		
+	}
+	
 
 }
